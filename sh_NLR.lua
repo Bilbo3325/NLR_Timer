@@ -45,7 +45,6 @@ if CLIENT then
         return (y/1440)*ScrH()
     end
 
-
     hook.Add("HUDPaint", "DrawDeathTimer", function()
         if LocalPlayer():GetNWInt("NLR") and LocalPlayer():GetNWInt("NLR") ~= 0 then
             local fraction = math.Clamp(LocalPlayer():GetNWInt("NLR") / TotalNLRTime, 0, 1)
