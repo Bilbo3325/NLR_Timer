@@ -1,10 +1,26 @@
 local TotalNLRTime = 120
+local ExemptJob = {
+    ["SCP-076-2'Able'"] = true 
+    ["SCP-096'The Shy Guy'"] = true 
+    ["SCP-397'Lola'"] = true 
+    ["SCP-4000-ATL'Joseph'"] = true 
+    ["SCP-457'The Burning Man'"] = true 
+    ["SCP-553-ATL'The Friendly Giant'"] = true
+    ["SCP-682'Hard-To-Destroy Reptile'"] = true 
+    ["SCP-662-A'Mr. Deeds'"] = true 
+    ["SCP-939'With Many Voices'"] = true 
+    ["SCP-947-ATL'1-Inch Warrior'"] = true 
+    ["SCP-966'Sleep Killer'"] = true 
+   -- ["SCP-"] = true (for the addition of new SCPs)
+}
 
 if SERVER then
     hook.Add("PlayerDeath", "ShowDeathTimerOnDeath", function(victim, inflictor, attacker)
-            
         if IsValid(attacker) and attacker:IsPlayer() then
-           victim:SetNWInt("NLR", TotalNLRTime) 
+            local playerCount = #player.GetAll()
+            if not (playerCount < 50 and attacker:Team() == ExemptJob) then
+                victim:SetNWInt("NLR", TotalNLRTime)  
+            end
         end
     end)
    
