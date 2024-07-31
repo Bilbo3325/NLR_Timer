@@ -6,6 +6,17 @@ if SERVER then
            victim:SetNWInt("NLR", TotalNLRTime) 
         end
     end)
+   
+    timer.Create("GlobalNLRTimer", 1, -1, function()
+            for PlayerIndex, ply in pairs(player.GetAll()) do
+                if ply:GetNWInt("NLR", nil) then
+                    if ply:GetNWInt("NLR") <= 0 then ply:SetNWInt("NLR", nil) else
+                        ply:SetNWInt("NLR", ply:GetNWInt("NLR")-1)
+                    end
+                end
+            end
+    end)
+end
 
 if CLIENT then
 
